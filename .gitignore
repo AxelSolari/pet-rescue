@@ -1,0 +1,8 @@
+.env
+
+# Ignorar dependencias (por si hacés un nuevo init alguna vez)
+node_modules/
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db

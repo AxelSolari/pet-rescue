@@ -25,7 +25,7 @@ const PublicationSchema: Schema = new Schema({
     },
     images: {
         type: [String],
-        required: false,
+        required: true,
     },
     description: {
         type: String,
