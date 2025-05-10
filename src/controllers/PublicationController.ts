@@ -48,4 +48,49 @@ export class PublicationController {
             console.log(error)
         }
     }
+
+    //#metodo para actualizar la publicacion
+    static updatePublication = async (req: Request, res: Response) => {
+        // console.log(req.params)
+        const { id } = req.params
+      
+        try {
+           const publication = await Publication.findByIdAndUpdate(id, req.body)
+
+             //#validacion en caso que el id no sea correcto
+            if(!publication) {
+                const error = new Error('Publicacion no encontrada')
+                res.status(404).json({error: error.message})
+                return
+            }
+
+            //#guardar la actualizacion
+            await publication.save()
+            res.send('Publicacion actualizada')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    //#metodo para eliminar publicacion
+     static deletePublication = async (req: Request, res: Response) => {
+        // console.log(req.params)
+        const { id } = req.params
+      
+        try {
+           const publication = await Publication.findById(id)
+
+            //#validacion en caso que la publicacion no exista
+            if(!publication) {
+                const error = new Error('Publicacion no encontrada')
+                res.status(404).json({error: error.message})
+                return
+            }
+
+        //    console.log(publication)
+           await publication.deleteOne()
+           res.send('Publicacion eliminada')
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }

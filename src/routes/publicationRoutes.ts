@@ -42,5 +42,33 @@ router.get('/:id',
     PublicationController.getPublicationById
 )
 
+//#endpoint para actualizar publicacion
+router.put('/:id', 
+    //#se importo 'param' de express-validator para validar ID
+    param('id')
+        .isMongoId().withMessage('ID no valido'),
+    //# en la actualizacion aparte de validar el id tambien hay que validar el body
+    body('publicationName')
+        .notEmpty().withMessage('El nombre de la publicacion es obligatorio'),
+    body('userName')
+        .notEmpty().withMessage('El nombre de usuario es obligatorio'),
+    body('images')
+        .notEmpty().withMessage('Al menos una imagen es requerida'),
+    body('description')
+        .notEmpty().withMessage('La descripcion es requerida'),
+    handleInputErrors,
+    //# se importa el controlador nuevo con el metodo
+    PublicationController.updatePublication
+)
+
+//#endpoint para eliminar publicacion
+router.delete('/:id', 
+    //#se importo 'param' de express-validator para validar ID
+    param('id')
+        .isMongoId().withMessage('ID no valido'),
+    handleInputErrors,
+    //# se importa el controlador nuevo con el metodo
+    PublicationController.deletePublication
+)
 //#se exporta el router
 export default router
