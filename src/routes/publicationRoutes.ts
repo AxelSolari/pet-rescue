@@ -3,6 +3,8 @@ import { PublicationController } from '../controllers/PublicationController'
 //# se instalo express-validator para validacion en lado de servidor
 import { body, param } from 'express-validator'
 import { handleInputErrors } from '../middleware/validation'
+import { CommentsController } from '../controllers/CommentsController'
+import { validatePublicationExists } from '../middleware/publication'
 
 //# se importo router
 
@@ -69,6 +71,13 @@ router.delete('/:id',
     handleInputErrors,
     //# se importa el controlador nuevo con el metodo
     PublicationController.deletePublication
+)
+
+
+//#ROUTES FOR COMMENTS
+router.post('/:publicationId/comments',
+    validatePublicationExists,
+    CommentsController.createComment
 )
 //#se exporta el router
 export default router
