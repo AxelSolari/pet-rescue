@@ -12,7 +12,7 @@ declare global {
 }
 
 //#middleware para verificar si una publicacion existe //esto previene codigo repetitivo en cada controller de 'coments' para verificar si una publicacion existe
-export async function validatePublicationExists(req: Request, res: Response, next: NextFunction) {
+export async function publicationExists(req: Request, res: Response, next: NextFunction) {
     try {
         const { publicationId } = req.params
         // console.log(publicationId)

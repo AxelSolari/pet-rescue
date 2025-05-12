@@ -4,7 +4,8 @@ import { PublicationController } from '../controllers/PublicationController'
 import { body, param } from 'express-validator'
 import { handleInputErrors } from '../middleware/validation'
 import { CommentsController } from '../controllers/CommentsController'
-import { validatePublicationExists } from '../middleware/publication'
+import { publicationExists } from '../middleware/publication'
+import { commentBelongsToPublication, commentExists } from '../middleware/comment'
 
 //# se importo router
 
@@ -75,9 +76,51 @@ router.delete('/:id',
 
 
 //#ROUTES FOR COMMENTS
+router.param('publicationId', publicationExists) //-> codigo para no estar colocando en cada endpoint 'validatePublicationExists' con este codigo el middleware se ejecuta siempre antes de la peticion y valida que la publicacion exista
+
+//#createComment
 router.post('/:publicationId/comments',
-    validatePublicationExists,
+    body('description')
+        .notEmpty().withMessage('No puedes enviar un comentario vacio'),
+    handleInputErrors,
     CommentsController.createComment
 )
+
+//#get all comments for that publication
+router.get('/:publicationId/comments',
+    CommentsController.getPublicationComments
+)
+
+
+//# utiliza middleware para validar que el comentario existsa 'commentId'
+router.param('commentId', commentExists)
+router.param('commentId', commentBelongsToPublication)
+//#get comment by id
+router.get('/:publicationId/comments/:commentId',
+    //#validar el commentId
+    param('commentId').isMongoId().withMessage('ID no valido'),
+    handleInputErrors,
+    CommentsController.getCommentById
+)
+
+//#actualizar comentario
+router.put('/:publicationId/comments/:commentId',
+    //#validar el commentId
+    param('commentId').isMongoId().withMessage('ID no valido'),
+    body('description')
+        .notEmpty().withMessage('No puedes enviar un comentario vacio'),
+    handleInputErrors,
+    CommentsController.updateComment
+)
+
+//#eliminar comentario
+router.delete('/:publicationId/comments/:commentId',
+    //#validar el commentId
+    param('commentId').isMongoId().withMessage('ID no valido'),
+    handleInputErrors,
+    CommentsController.deleteComment
+)
+
+
 //#se exporta el router
 export default router

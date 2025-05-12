@@ -35,7 +35,7 @@ export class PublicationController {
         const { id } = req.params
       
         try {
-            const publication = await Publication.findById(id)
+            const publication = await Publication.findById(id).populate('comments')
 
             //#validacion en caso que el id tenga al un dato erroneo
             if(!publication) {
@@ -55,7 +55,7 @@ export class PublicationController {
         const { id } = req.params
       
         try {
-           const publication = await Publication.findByIdAndUpdate(id, req.body)
+           const publication = await Publication.findById(id)
 
              //#validacion en caso que el id no sea correcto
             if(!publication) {
@@ -63,6 +63,11 @@ export class PublicationController {
                 res.status(404).json({error: error.message})
                 return
             }
+            //#actualizar la publicacion
+            publication.publicationName = req.body.publicationName
+            publication.userName = req.body.userName
+            publication.images = req.body.images
+            publication.description = req.body.description
 
             //#guardar la actualizacion
             await publication.save()
