@@ -1,19 +1,10 @@
+import type { PublicationFormData } from '../../types';
 import ErrorMessage from '../ErrorMessage';
 import type { UseFormRegister, FieldErrors  } from 'react-hook-form'
 
 type PublicationFormProps = {
-    register: UseFormRegister<{
-        publicationName: string;
-        userName: string;
-        images: string;
-        description: string;
-    }>
-    errors: FieldErrors<{
-        publicationName: string;
-        userName: string;
-        images: string;
-        description: string;
-    }>
+    register: UseFormRegister<PublicationFormData>
+    errors: FieldErrors<PublicationFormData>
 }
 
 export default function PublicationForm({errors, register}: PublicationFormProps) {

@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import { useForm } from "react-hook-form";
 import PublicationForm from "../../components/publications/PublicationForm";
-
+import type { PublicationFormData } from "../../types";
 export default function CreatePublicationView() {
     const simulatedUser = "Invitado"
-    const initualValues = {
+    const initualValues: PublicationFormData= {
         publicationName: "", 
         userName: simulatedUser,
         images: "",
@@ -14,7 +14,7 @@ export default function CreatePublicationView() {
     const { register, handleSubmit, formState: {errors}} = useForm({defaultValues: initualValues})
 
     //#tomar los datos del form
-    const handleForm = (data) => {
+    const handleForm = (data : PublicationFormData) => {
         console.log(data)
     }
   return (
