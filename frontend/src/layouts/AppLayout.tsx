@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom"
 import Logo from "../components/Logo"
 import NavMenu from "../components/NavMenu"
+import { Flip, ToastContainer } from 'react-toastify'
+
 export default function AppLayout() {
   return (
     <>
@@ -18,10 +20,22 @@ export default function AppLayout() {
         <section className="">
             <Outlet />
         </section>
-
-        <footer className="py-2">
+{/* 
+        <footer className="py-2 bg-amber-300 fixed bottom-0 rounded-t-lg w-full">
             <p className="text-center">Copyright • {new Date().getFullYear()}</p>
-        </footer>
+        </footer> */}
+        <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            closeOnClick={false}
+            transition={Flip}
+            pauseOnHover={false}
+            icon={({ type }) => {
+            if (type === "success") return "✅";
+            if (type === "error") return "⛔";
+            else return "ℹ️";
+    }}
+        />
     </>
   )
 }

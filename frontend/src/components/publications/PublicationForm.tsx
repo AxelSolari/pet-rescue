@@ -16,7 +16,7 @@ export default function PublicationForm({errors, register}: PublicationFormProps
                 </label>
                 <input
                     id="publicationName"
-                    className="w-full p-3  border border-gray-200"
+                    className="w-full p-3 border border-gray-200 rounded-lg"
                     type="text"
                     placeholder="Titulo de la Publicacion"
                     {...register("publicationName", {
@@ -35,7 +35,7 @@ export default function PublicationForm({errors, register}: PublicationFormProps
                 </label>
                 <input
                     id="userName"
-                    className="w-full p-3  border border-gray-200"
+                    className="w-full p-3 border border-gray-200 rounded-lg"
                     type="text"
                     placeholder="Nombre de Usuario"
                     {...register("userName", {
@@ -55,8 +55,8 @@ export default function PublicationForm({errors, register}: PublicationFormProps
                 </label>
                 <input
                     id="images"
-                    className="w-full p-3  border border-gray-200"
-                    type="file"
+                    className="w-full p-3 border border-gray-200 rounded-lg"
+                    type="text"
                     placeholder="Imagenes"
                     {...register("images", {
                         required: "Al menos una imagen es obligatoria",
@@ -74,7 +74,7 @@ export default function PublicationForm({errors, register}: PublicationFormProps
                 </label>
                 <textarea
                     id="description"
-                    className="w-full p-3  border border-gray-200"
+                    className="w-full p-3 border border-gray-200 rounded-lg"
                     placeholder="Ingresa una descripcion"
                     {...register("description", {
                         required: "La descripción es obligatoria"

@@ -1,5 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import cors from 'cors'
+import { corsConfig } from './config/cors'
 import { connectDB } from './config/db'
 import publicationRoutes from './routes/publicationRoutes'
 
@@ -15,6 +17,8 @@ connectDB()
 
 //# creacion del servidor (se importo express)
 const app = express()
+//#permitir las conexiones utilizando la configuracion hecha
+app.use(cors(corsConfig))
 
 //#en el servidor se habilita la lectura de formatos en consola (ej: JSON)
 app.use(express.json())

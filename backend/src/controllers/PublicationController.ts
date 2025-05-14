@@ -11,6 +11,13 @@ export class PublicationController {
         //# instancia de objeto de Publication
         const publication = new Publication(req.body)
 
+        //#forzar error para mostrar error con toastify
+        // if(true){
+        //     const error = new Error('Publicacion no encontrada')
+        //     res.status(404).json({error: error.message})
+        //     return
+        // }
+
         //#almacenar la publicacion con try catch
         try {
             await publication.save()
