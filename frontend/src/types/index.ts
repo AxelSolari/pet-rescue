@@ -6,7 +6,8 @@ export const publicationSchema = z.object({
     publicationName: z.string(),
     userName: z.string(),
     images: z.array(z.string()),
-    description: z.string()
+    description: z.string(),
+    status: z.string()
 })
 
 //#schema para mostrar las publicaciones
@@ -16,10 +17,11 @@ export const dashboardPublications = z.array(
         publicationName: true,
         userName: true,
         images: true,
-        description: true
+        description: true,
+        status: true
     })
 )
 
 export type Publication = z.infer<typeof publicationSchema>
 //#type para el formulario
-export type PublicationFormData = Pick<Publication,'publicationName' | 'userName' | 'images' | 'description'>
+export type PublicationFormData = Pick<Publication,'publicationName' | 'userName' | 'images' | 'description' | 'status'>

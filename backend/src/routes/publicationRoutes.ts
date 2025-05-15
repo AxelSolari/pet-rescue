@@ -24,6 +24,8 @@ router.post('/',
         .notEmpty().withMessage('Al menos una imagen es requerida'),
     body('description')
         .notEmpty().withMessage('La descripcion es requerida'),
+    body('status')
+        .notEmpty().withMessage('Un estado es requerido'),
     //#colocacion del middleware para manejar errores
     handleInputErrors,
     PublicationController.createPublication
@@ -59,6 +61,8 @@ router.put('/:id',
         .notEmpty().withMessage('Al menos una imagen es requerida'),
     body('description')
         .notEmpty().withMessage('La descripcion es requerida'),
+    body('status')
+        .notEmpty().withMessage('Un estado es requerido'),
     handleInputErrors,
     //# se importa el controlador nuevo con el metodo
     PublicationController.updatePublication

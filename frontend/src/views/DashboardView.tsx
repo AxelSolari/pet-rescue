@@ -25,7 +25,6 @@ export default function DashBoardView() {
                     Mis Publicaciones
                 </h1>
 
-                {/* {isLoading && <ClipLoader className="mt-10" size={70} color="blue"/>} */}
                 {data.length ? (
                     <>
                         <Link
@@ -38,16 +37,37 @@ export default function DashBoardView() {
 
                         <ul
                             role="list"
-                            className=" mt-10 bg-amber-200 shadow-lg"
+                            className=" mt-10"
                         >
                             {data.map((publication) => (
                                 <li
                                     key={publication._id}
-                                    className="bg-blue-400 py-2"
+                                    className="bg-white py-2 mb-4 shadow-lg px-3 rounded-lg w-[90%] lg:w-1/2 mx-auto"
                                 >
                                     <div className="">
-                                      <NavCard />
+                                      <NavCard
+                                        publicationId ={publication._id}
+                                      />
+                                        <div className="gap-2 flex py-2 items-center">
+                                            <h3 className="text-xl">
+                                                {publication.publicationName}
+                                            </h3>
+                                            |
+                                            <p className="text-sm"
+                                            >Creado por: <span className="font-semibold">{publication.userName}</span></p>
+                                        </div>
+                                        <div className="bg-slate-500 py-[.5px]"></div>
+                                        <div className="flex items-center gap-6">
+                                            <img src='/perro.jpg' className="w-44 my-3 rounded" />
+                                            <p className="font-medium text-lg text-center flex flex-col justify-center">Estado: <span className={`text-xs px-3 py-1 rounded-full ${publication.status === 'perdido' ? "bg-red-700 text-white font-bold" : "bg-amber-400 font-bold"}`}>{publication.status === 'perdido' ? 'Perdido' : 'En Adopcion'}</span> </p>
+                                        </div>
+                                        <div className="bg-slate-500 py-[.5px]"></div>
+                                        <p className="font-medium">Descripcion de la publicacion :</p>
+                                        <p className="text-sm py-1">
+                                            {publication.description}
+                                        </p>
                                     </div>
+
                                 </li>
                             ))}
                         </ul>
@@ -71,3 +91,4 @@ export default function DashBoardView() {
             </>
         );
 }
+

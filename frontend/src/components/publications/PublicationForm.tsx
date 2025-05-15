@@ -10,6 +10,26 @@ type PublicationFormProps = {
 export default function PublicationForm({errors, register}: PublicationFormProps) {
     return (
         <>
+            <div className='mb-5 space-y-3 flex flex-col'>
+                <label htmlFor='status' className='text-sm uppercase font-bold'>
+                    Selecciona un estado para la publicacion
+                </label>
+                <select
+                    className='rounded border border-slate-400 p-1'
+                    id='status'
+                    {...register('status', {
+                        required: 'Almenos un estado es requerido'
+                    })}
+                >   
+                    <option value=''>Selecciona un estado</option>
+                    <option value='perdido'>Perdido</option>
+                    <option value='enAdopcion'>En Adopcion</option>
+                    <option value='encontrado'>Adoptado</option>
+
+                </select>
+
+            </div>
+
             <div className="mb-5 space-y-3">
                 <label htmlFor="publicationName" className="text-sm uppercase font-bold">
                     Titulo de la publicacion
@@ -29,25 +49,8 @@ export default function PublicationForm({errors, register}: PublicationFormProps
                 )}
             </div>
 
-            <div className="mb-5 space-y-3">
-                <label htmlFor="userName" className="text-sm uppercase font-bold">
-                    Nombre de Usuario
-                </label>
-                <input
-                    id="userName"
-                    className="w-full p-3 border border-gray-200 rounded-lg"
-                    type="text"
-                    placeholder="Nombre de Usuario"
-                    {...register("userName", {
-                        required: "El Nombre de usuario es obligatorio",
-                    })}
-                    readOnly
-                />
 
-                {errors.userName && (
-                    <ErrorMessage>{errors.userName.message}</ErrorMessage>
-                )}
-            </div>
+              
 
             <div className="mb-5 space-y-3">
                 <label htmlFor="images" className="text-sm uppercase font-bold">

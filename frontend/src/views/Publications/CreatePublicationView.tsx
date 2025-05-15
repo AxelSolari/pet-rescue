@@ -17,7 +17,8 @@ export default function CreatePublicationView() {
         publicationName: "", 
         userName: simulatedUser,
         images: [],
-        description: "" 
+        description: "", 
+        status: ""
     }
     const { register, handleSubmit, formState: {errors}} = useForm({defaultValues: initualValues})
 

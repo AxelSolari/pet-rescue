@@ -6,7 +6,7 @@ import { IComment } from "./Comentarios";
 const publcationStatus = {
     "PERDIDO": 'perdido',
     "ENCONTRADO": 'encontrado',
-    "EN ADOPCION": 'enAdopcion'
+    "EN_ADOPCION": 'enAdopcion'
 } as const
 
 //#type para los estados
@@ -53,7 +53,8 @@ const PublicationSchema: Schema = new Schema({
     ],
     status: {
         type: String,
-        enum: Object.values(publcationStatus)
+        enum: Object.values(publcationStatus),
+        required: true
     }
 }, {timestamps: true})
 
