@@ -1,15 +1,42 @@
 import { Link } from "react-router-dom";
 import { PlusCircleIcon } from "@heroicons/react/20/solid";
-import { useQuery } from "@tanstack/react-query";
-import { getPublications } from "../api/ProjectAPI";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { deletePublication, getPublications } from "../api/ProjectAPI";
 import { ClipLoader } from "react-spinners";
 import NavCard from "../components/publications/NavCard";
+import { toast } from "react-toastify";
 
+const statusColors: Record<string, string> = {
+    perdido: "bg-red-700 text-white font-bold",
+    enAdopcion: "bg-amber-500 text-black font-bold",
+    encontrado: "bg-green-700 text-white font-bold",
+    adoptado: "bg-blue-700 text-white font-bold",
+}
+const statusText: Record<string, string> = {
+    perdido: "Perdido",
+    enAdopcion: "En Adopcion",
+    encontrado: "Encontrado",
+    adoptado: "Adoptado",
+}
 export default function DashBoardView() {
     const { data, isLoading } = useQuery({
         queryKey: ["publications"],
         queryFn: getPublications,
     });
+
+    const queryClient = useQueryClient()
+
+    const { mutate } = useMutation({
+        mutationFn: deletePublication,
+        onError: (error) => {
+            toast.error(error.message)
+        },
+        onSuccess: (data) => {
+            toast.success(data)
+            queryClient.invalidateQueries({queryKey: ['publications']})
+        }
+    })
+
     // console.log(data)
     if (isLoading)
         return (
@@ -47,6 +74,7 @@ export default function DashBoardView() {
                                     <div className="">
                                       <NavCard
                                         publicationId ={publication._id}
+                                        mutate= {mutate}
                                       />
                                         <div className="gap-2 flex py-2 items-center">
                                             <h3 className="text-xl">
@@ -56,14 +84,14 @@ export default function DashBoardView() {
                                             <p className="text-sm"
                                             >Creado por: <span className="font-semibold">{publication.userName}</span></p>
                                         </div>
-                                        <div className="bg-slate-500 py-[.5px]"></div>
-                                        <div className="flex items-center gap-6">
+                                        <div className="w-full border-b border-gray-400"></div>
+                                        <div className="flex items-center gap-6 lg:justify-around">
                                             <img src='/perro.jpg' className="w-44 my-3 rounded" />
-                                            <p className="font-medium text-lg text-center flex flex-col justify-center">Estado: <span className={`text-xs px-3 py-1 rounded-full ${publication.status === 'perdido' ? "bg-red-700 text-white font-bold" : "bg-amber-400 font-bold"}`}>{publication.status === 'perdido' ? 'Perdido' : 'En Adopcion'}</span> </p>
+                                            <p className="font-medium text-lg text-center flex flex-col justify-center">Estado: <span className={`text-xs px-3 py-1 rounded-full ${statusColors[publication.status]}`}>{statusText[publication.status]}</span></p>
                                         </div>
-                                        <div className="bg-slate-500 py-[.5px]"></div>
+                                        <div className="w-full border-b border-gray-400"></div>
                                         <p className="font-medium">Descripcion de la publicacion :</p>
-                                        <p className="text-sm py-1">
+                                        <p className="text-sm py-1 break-all overflow-hidden">
                                             {publication.description}
                                         </p>
                                     </div>

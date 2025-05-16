@@ -1,24 +1,53 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import PublicationForm from "./PublicationForm"
 import { ArrowLeftIcon } from "@heroicons/react/20/solid"
-import type { PublicationFormData } from "../../types"
+import type { Publication, PublicationFormData } from "../../types"
 import { useForm } from "react-hook-form"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { updatePublication } from "../../api/ProjectAPI"
+import { toast } from "react-toastify"
 
+//#type para edicion de form
+type EditPublicationFormProps = {
+    data: PublicationFormData
+    publicationId: Publication['_id']
+}
 
-export default function EditPublicationForm() {
+export default function EditPublicationForm({data, publicationId} : EditPublicationFormProps) {
     
-    const simulatedUser = "Invitado"
-    const initualValues: PublicationFormData= {
-            publicationName: "", 
-            userName: simulatedUser,
-            images: [],
-            description: "", 
-            status: ""
-        }
-        const { register, handleSubmit, formState: {errors}} = useForm({defaultValues: initualValues})
+        const navigate = useNavigate()
+    // console.log(data)
+        const { register, handleSubmit, formState: {errors}} = useForm({defaultValues: {
+             publicationName: data.publicationName, 
+            userName: data.userName,
+            images: data.images,
+            description: data.description, 
+            status: data.status
+        }})
 
-        const handleForm = () => {
-            
+        //#instancia de queryClient
+        const queryClient = useQueryClient()
+        //#mutation config
+        const { mutate } = useMutation({
+            mutationFn: updatePublication,
+            onError: (error) => {
+                toast.error(error.message)
+            },
+            onSuccess: (data) => {
+                queryClient.invalidateQueries({queryKey: ['publications']})
+                queryClient.invalidateQueries({queryKey: ['editPublication', publicationId]})//# para que haga refetch en la edicion
+                toast.success(data)
+                navigate('/dashboardview')
+            }
+        })
+
+        const handleForm = (formData: PublicationFormData) => {
+                // console.log(formData)
+                const data = {
+                    formData,
+                    publicationId
+                }
+                mutate(data)
         }
   return (
    <>

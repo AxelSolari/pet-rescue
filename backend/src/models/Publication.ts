@@ -6,7 +6,8 @@ import { IComment } from "./Comentarios";
 const publcationStatus = {
     "PERDIDO": 'perdido',
     "ENCONTRADO": 'encontrado',
-    "EN_ADOPCION": 'enAdopcion'
+    "EN_ADOPCION": 'enAdopcion',
+    "ADOPTADO": 'adoptado'
 } as const
 
 //#type para los estados

@@ -20,15 +20,15 @@ export default function NavMenu() {
         leaveFrom="opacity-100 translate-x-0"
         leaveTo="opacity-0 translate-x-1"
       >
-        <Popover.Panel className="absolute mt-2 left-16 flex w-44 lg:w-[174px] -translate-x-full transition duration-200 lg:translate-x-full lg:-left-18">
+        <Popover.Panel className="absolute mt-2 left-16 flex w-44 lg:w-[174px] -translate-x-full transition duration-200 lg:translate-x-full lg:-left-18 z-50">
           <div className="w-full rounded-xl bg-white p-4 text-sm font-semibold leading-6 text-blue-700 shadow-lg">
-            <p className='text-center mb-2'>Hola: Usuario</p>
+            <p className='text-center mb-2'>Hola: Invitado</p>
             <Link
               to='/profile'
               className='p-2 hover:text-purple-950 flex items-center gap-3'
             ><UserIcon className='w-5 h-5 text-black' /> Mi Perfil</Link>
             <Link
-              to='/'
+              to='/dashboardview'
               className='p-2 hover:text-purple-950 flex items-center gap-3'
             ><NewspaperIcon className='w-5 h-5 text-black' /> Mis Publicaciones</Link>
             <button

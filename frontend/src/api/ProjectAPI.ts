@@ -46,12 +46,39 @@ export async function getPublicationById(id: Publication['_id']) {
         //
         const { data } = await api(`/publications/${id}`)
         // console.log(data)
-        //#validar respuesta con el nuevo schema
-        // const response = dashboardPublications.safeParse(data)
-        // console.log(response)
-        // if(response.success){
-        //     return response.data
-        // }
+        return data
+    } catch (error) {
+        //#manejo de error con axios
+        if(isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.error)
+        }
+    }
+}
+
+//#type para funcion que realiza update de publicacion
+type PublicationAPIType = {
+    formData: PublicationFormData
+    publicationId: Publication['_id'] 
+}
+//#actualizar publicacion
+export async function updatePublication({formData, publicationId}: PublicationAPIType) {
+    try {
+        const { data } = await api.put<string>(`/publications/${publicationId}`, formData)
+        return data
+    } catch (error) {
+        //#manejo de error con axios
+        if(isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.error)
+        }
+    }
+}
+
+//#eliminar publicacion
+export async function deletePublication(id: Publication['_id']) {
+    try {
+        //
+        const { data } = await api.delete<string>(`/publications/${id}`)
+        // console.log(data)
         return data
     } catch (error) {
         //#manejo de error con axios

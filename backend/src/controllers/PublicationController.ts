@@ -1,5 +1,6 @@
 import type { Request, Response } from "express"
 import Publication from "../models/Publication"
+import { parse } from "node:path/win32"
 
 //# se crea controlador para publication
 export class PublicationController {
@@ -75,6 +76,7 @@ export class PublicationController {
             publication.userName = req.body.userName
             publication.images = req.body.images
             publication.description = req.body.description
+            publication.status = req.body.status
 
             //#guardar la actualizacion
             await publication.save()

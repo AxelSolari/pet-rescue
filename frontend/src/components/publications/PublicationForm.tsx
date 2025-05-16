@@ -24,10 +24,9 @@ export default function PublicationForm({errors, register}: PublicationFormProps
                     <option value=''>Selecciona un estado</option>
                     <option value='perdido'>Perdido</option>
                     <option value='enAdopcion'>En Adopcion</option>
-                    <option value='encontrado'>Adoptado</option>
-
+                    <option value='encontrado'>Encontrado</option>
+                    <option value='adoptado'>Adoptado</option>
                 </select>
-
             </div>
 
             <div className="mb-5 space-y-3">

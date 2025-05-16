@@ -1,6 +1,12 @@
+import { Link } from "react-router-dom";
 
 export default function Logo() {
   return (
-    <img src="/petlogo.png" alt="Pets Logo" />
+    <Link
+      to='/'
+    >
+      <img src="/petlogo.png" alt="Pets Logo" />
+    
+    </Link>
   )
 }

@@ -11,7 +11,7 @@ export default function EditPublicationView() {
   const publicationId = params.publicationId!
   // console.log(publicationId)
   const {data, isLoading, isError } = useQuery({
-    queryKey: ['editPublication', publicationId],
+    queryKey: ['editPublication', publicationId],//-> publicationId se coloca para que el cache guarde diferentes consultas, sin esta referencia completaria el formulario siempre con los mismos datos
     queryFn: () => getPublicationById(publicationId),
     retry: false
   })
@@ -24,5 +24,5 @@ export default function EditPublicationView() {
     
     if(isError) return <Navigate to='/notfound' />
 
-  if(data)  return <EditPublicationForm />
+  if(data)  return <EditPublicationForm data={data} publicationId={publicationId}/>
 }
