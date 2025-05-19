@@ -7,7 +7,9 @@ export const publicationSchema = z.object({
     userName: z.string(),
     images: z.array(z.string()),
     description: z.string(),
-    status: z.string()
+    status: z.string(),
+    createdAt: z.string(),
+    updatedAt: z.string()
 })
 
 //#schema para mostrar las publicaciones
@@ -18,7 +20,9 @@ export const dashboardPublications = z.array(
         userName: true,
         images: true,
         description: true,
-        status: true
+        status: true,
+        createdAt: true,
+        updatedAt: true
     })
 )
 
