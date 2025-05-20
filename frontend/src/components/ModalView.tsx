@@ -5,6 +5,8 @@ import { useQuery } from '@tanstack/react-query';
 import { getPublicationById } from '../api/ProjectAPI';
 import { toast } from 'react-toastify';
 import { formatDate } from '../utils/utils';
+import { ChatBubbleBottomCenterIcon } from '@heroicons/react/20/solid';
+import ShareButton from './ShareButton';
 
 const statusColors: Record<string, string> = {
     perdido: "bg-red-700 text-white font-bold",
@@ -56,7 +58,13 @@ export default function ModalView() {
     if(data) return (
         <>
             <Transition appear show={show} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={() => navigate(location.pathname, {replace: true})}>
+                <Dialog
+                    as="div"
+                    className="relative z-10"
+                    onClose={() =>
+                        navigate(location.pathname, { replace: true })
+                    }
+                >
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -81,11 +89,17 @@ export default function ModalView() {
                                 leaveTo="opacity-0 scale-95"
                             >
                                 <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-5">
-                                    <p className=' text-slate-500'>
-                                        Creado: <span className='font-semibold'>{formatDate(data.createdAt)}</span>
+                                    <p className=" text-slate-500">
+                                        Creado:{" "}
+                                        <span className="font-semibold">
+                                            {formatDate(data.createdAt)}
+                                        </span>
                                     </p>
-                                     <p className=' text-slate-500'>
-                                        Publicado por: <span className='font-bold text-lg'>{data.userName}</span>
+                                    <p className=" text-slate-500">
+                                        Publicado por:{" "}
+                                        <span className="font-bold text-lg">
+                                            {data.userName}
+                                        </span>
                                     </p>
                                     <Dialog.Title
                                         as="h3"
@@ -93,14 +107,20 @@ export default function ModalView() {
                                     >
                                         {data.publicationName}
                                     </Dialog.Title>
-                                   
-                                    <img  
-                                        className='w-full'
-                                        src='/perro.jpg'
-                                        alt='Imagen del animal'  
+
+                                    <img
+                                        className="w-full"
+                                        src="/perro.jpg"
+                                        alt="Imagen del animal"
                                     />
-                                    <div className='flex items-center my-1'>
-                                        <p className='text-lg'>Estado:  <span className={`text-xs px-3 py-1 rounded-full ${ statusColors[data.status]}`}>
+                                    <div className="flex items-center my-1">
+                                        <p className="text-lg">
+                                            Estado:{" "}
+                                            <span
+                                                className={`text-xs px-3 py-1 rounded-full ${
+                                                    statusColors[data.status]
+                                                }`}
+                                            >
                                                 {statusText[data.status]}
                                             </span>
                                         </p>
@@ -108,10 +128,20 @@ export default function ModalView() {
                                     <p className="text-xl font-bold underline mb-2">
                                         Descripcion:
                                     </p>
-                                    <p className='font-semibold'>
+                                    <p className="font-semibold">
                                         {data.description}
                                     </p>
-
+                                    <div className="flex justify-between lg:justify-between p-2 mt-2 items-center">
+                                        <button className="flex items-center gap-2 cursor-pointer text-sm p-2">
+                                            <ChatBubbleBottomCenterIcon className="w-4 h-4 text-yellow-700" />
+                                            Comentar
+                                        </button>
+                                        <div>
+                                            <ShareButton
+                                                publicationId={publicationId}
+                                            />
+                                        </div>
+                                    </div>
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>
@@ -119,5 +149,5 @@ export default function ModalView() {
                 </Dialog>
             </Transition>
         </>
-    )
+    );
 }

@@ -4,6 +4,7 @@ import { ClipLoader } from "react-spinners";
 import { ChatBubbleBottomCenterIcon, ShareIcon } from "@heroicons/react/20/solid";
 import ModalView from "./ModalView";
 import { useNavigate } from "react-router-dom";
+import ShareButton from "./ShareButton";
 
 const statusColors: Record<string, string> = {
     perdido: "bg-red-700 text-white font-bold",
@@ -80,17 +81,7 @@ export default function MainList() {
                                     {publication.description}
                                 </p>
                             </div>
-                            <div className="flex justify-between lg:justify-between p-2 mt-2">
-                                {/* <button className="flex items-center cursor-pointer text-sm p-2 gap-2"><ArrowTopRightOnSquareIcon className="w-4 h-4 text-yellow-700" />Ver Publicacion</button> */}
-                                <button className="flex items-center gap-2 cursor-pointer text-sm p-2">
-                                    <ChatBubbleBottomCenterIcon className="w-4 h-4 text-yellow-700" />
-                                    Comentar
-                                </button>
-                                <button className="flex items-center gap-2 cursor-pointer text-sm p-2">
-                                    <ShareIcon className="w-4 h-4 text-yellow-700" />{" "}
-                                    Compartir
-                                </button>
-                            </div>
+                          
                         </li>
                     ))}
                 </ul>
