@@ -5,6 +5,7 @@ import { corsConfig } from './config/cors'
 import { connectDB } from './config/db'
 import publicationRoutes from './routes/publicationRoutes'
 import morgan from 'morgan'
+import authRoutes from './routes/authRoutes'
 
 //**/-> previamente se instalaron dependencias (nodemon, ts-node, typescript) / express -> con -D @types/express */
 //**/-> se creo un 'tsconfig.json' y se copio un gist del profesor para configurarlo */
@@ -28,6 +29,7 @@ app.use(morgan('dev'))
 app.use(express.json())
 
 //#Routes
+app.use('/api/auth', authRoutes)
 app.use('/api/publications', publicationRoutes) //-> soporta todos los metodos HTTP
 
 

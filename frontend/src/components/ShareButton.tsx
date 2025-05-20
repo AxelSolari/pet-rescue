@@ -32,10 +32,10 @@ export default function ShareButton({publicationId} : ShareButtonProps) {
         </button>
 
         {open && (
-            <div className="absolute -right-5 -top-42 z-10 mt-2 w-34 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 transition duration-300 focus:outline-none"
+            <div className="absolute -right-5 -top-42 z-10 mt-2 w-34 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 ref={menuRef}
             >
-                <div className="py-1 flex flex-col items-center ">
+                <div className="py-1 flex flex-col items-center shadow-lg ">
                     <a
                         href={`https://wa.me/?text=${encodeURIComponent(url)}`}
                         target="_blank"
