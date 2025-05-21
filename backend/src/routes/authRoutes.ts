@@ -6,7 +6,7 @@ import { handleInputErrors } from "../middleware/validation";
 const router = Router()
 
 router.post('/create-account',
-    body('name')
+    body('userName')
         .notEmpty().withMessage('El nombre no puede ir vacio'),
     body('password')
         .isLength({min: 8}).withMessage('El password es muy corto, minimo 8 caracteres'),
@@ -28,6 +28,15 @@ router.post('/confirm-account',
     handleInputErrors,
     AuthController.confirmAccount
 
+)
+
+router.post('/login', 
+     body('email')
+        .isEmail().withMessage('E-mail no valido'),
+    body('password')
+        .notEmpty().withMessage('El password no puede ir vacio'),
+    handleInputErrors,
+    AuthController.login
 )
 
 export default router

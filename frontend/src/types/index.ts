@@ -1,5 +1,18 @@
 import { z } from "zod";
 
+//authUsers
+const authSchema = z.object({
+    userName: z.string(),
+    email: z.string().email(),
+    password: z.string(),
+    password_confirmation: z.string(),
+    token: z.string()
+})
+type Auth = z.infer<typeof authSchema>
+export type UserLoginForm = Pick<Auth, 'email' | 'password'>
+export type UserRegistrationForm = Pick<Auth, 'email' | 'password' | 'password_confirmation' | 'userName'>
+export type ConfirmToken = Pick<Auth, 'token'>
+
 //#Publication Schemas
 export const publicationSchema = z.object({
     _id: z.string(),

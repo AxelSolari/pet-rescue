@@ -33,7 +33,7 @@ export default function AppLayout() {
             if (type === "success") return "✅";
             if (type === "error") return "⛔";
             else return "ℹ️";
-    }}
+            }}
         />
     </>
   )

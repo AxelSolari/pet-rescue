@@ -16,7 +16,7 @@ export class AuthEmail {
                 text: 'PetsRescue - Confirma tu cuenta',
                 html: `<p>Hola: ${user.name}, has creado tu cuenta en PetsRescue, ya casi esta todo listo, solo debes confirmar tu cuenta</p>
                     <p>Visita el siguiente enlace:</p>
-                    <a href="">Confirmar cuenta</a>
+                    <a href="${process.env.FRONTEND_URL}/auth/confirm-account">Confirmar Cuenta </a>
                     <p>E ingresa el codigo: <b>${user.token}</b></p>
                     <p>Este toquen expira en: 10 minutos </p>
                 `
