@@ -5,7 +5,7 @@ import { ToastContainer, Flip } from "react-toastify";
 export default function AuthLayout() {
   return (
     <>
-        <div className="min-h-dvh bg-gradient-to-r from-yellow-200 via-yellow-500 to-yellow-200">
+        <div className="min-h-dvh bg-gradient-to-r from-amber-300 via-gray-300 to-amber-300">
             <div className="py-10 mx-auto w-[90%] ">
                 <div className="w-32 mx-auto mb-10">
                     <Logo />

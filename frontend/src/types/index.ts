@@ -12,6 +12,9 @@ type Auth = z.infer<typeof authSchema>
 export type UserLoginForm = Pick<Auth, 'email' | 'password'>
 export type UserRegistrationForm = Pick<Auth, 'email' | 'password' | 'password_confirmation' | 'userName'>
 export type ConfirmToken = Pick<Auth, 'token'>
+export type RequestConfirmationCodeForm = Pick<Auth, 'email'>
+export type ForgotPasswordForm = Pick<Auth, 'email'>
+export type NewPasswordForm = Pick<Auth, 'password' | 'password_confirmation'>
 
 //#Publication Schemas
 export const publicationSchema = z.object({

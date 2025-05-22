@@ -36,10 +36,10 @@ export default function RegisterView() {
 
   return (
       <>
-          <h1 className="text-5xl font-black text-indigo-800 text-center">
+          <h1 className="text-4xl font-black text-indigo-800 text-center">
               Registrar Cuenta
           </h1>
-          <p className="text-center text-2xl font-light text-slate-700 mt-5">
+          <p className="text-center text-xl font-light text-slate-700 mt-5">
               Llena el formulario para {""}
               <span className=" text-indigo-500 font-bold">
                   {" "}
@@ -63,7 +63,7 @@ export default function RegisterView() {
                       id="email"
                       type="email"
                       placeholder="Email de Registro"
-                      className="w-full p-3  border-white border rounded focus:outline-none focus:rin-0 placeholder-slate-700 focus:bg-black/10"
+                      className="w-full p-3  border-white border rounded focus:outline-none focus:rin-0 focus:bg-black/10 placeholder-slate-700 "
                       {...register("email", {
                           required: "El Email de registro es obligatorio",
                           pattern: {
