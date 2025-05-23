@@ -6,6 +6,7 @@ import { handleInputErrors } from '../middleware/validation'
 import { CommentsController } from '../controllers/CommentsController'
 import { publicationExists } from '../middleware/publication'
 import { commentBelongsToPublication, commentExists } from '../middleware/comment'
+import { authenticate } from '../middleware/auth'
 
 //# se importo router
 
@@ -15,6 +16,7 @@ const router = Router()
 
 //#.post para crear publicaciones
 router.post('/',
+    authenticate,
     //#validacion con express-validator
     body('publicationName')
         .notEmpty().withMessage('El nombre de la publicacion es obligatorio'),

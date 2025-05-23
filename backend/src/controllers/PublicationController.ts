@@ -7,18 +7,10 @@ export class PublicationController {
     
     //#metodo para obtener las publicaciones
     static createPublication = async (req: Request, res: Response) => {
-        // console.log(req.body)
-        // res.send('creando publicacion')
+        
         //# instancia de objeto de Publication
         const publication = new Publication(req.body)
-
-        //#forzar error para mostrar error con toastify
-        // if(true){
-        //     const error = new Error('Publicacion no encontrada')
-        //     res.status(404).json({error: error.message})
-        //     return
-        // }
-
+        console.log(req.user)
         //#almacenar la publicacion con try catch
         try {
             await publication.save()

@@ -19,8 +19,8 @@ export default function LoginView() {
     onError: (error) => {
       toast.error(error.message)
     },
-    onSuccess: (data) => {
-      toast.success(data)
+    onSuccess: () => {
+      toast.success('Iniciando sesion...')
     }
   })
 
@@ -39,7 +39,7 @@ export default function LoginView() {
           <input
             id="email"
             type="email"
-            placeholder="Email de Registro"
+            placeholder="Email"
             className="w-full p-2  border-white border rounded text-black bg-transparent focus:outline-none focus:rin-0 placeholder-slate-700 focus:bg-black/10 mb-5"
             {...register("email", {
               required: "El Email es obligatorio",
@@ -57,7 +57,7 @@ export default function LoginView() {
         <div className="flex flex-col gap-5">
           <input
             type="password"
-            placeholder="Password de Registro"
+            placeholder="Password"
             className="w-full p-2  border-white border rounded focus:outline-none focus:rin-0 placeholder-slate-700 focus:bg-black/10 mb-5"
             {...register("password", {
               required: "El Password es obligatorio",
