@@ -20,7 +20,6 @@ export type NewPasswordForm = Pick<Auth, 'password' | 'password_confirmation'>
 export const publicationSchema = z.object({
     _id: z.string(),
     publicationName: z.string(),
-    userName: z.string(),
     images: z.array(z.string()),
     description: z.string(),
     status: z.string(),
@@ -33,7 +32,6 @@ export const dashboardPublications = z.array(
     publicationSchema.pick({
         _id: true,
         publicationName: true,
-        userName: true,
         images: true,
         description: true,
         status: true,
@@ -44,4 +42,4 @@ export const dashboardPublications = z.array(
 
 export type Publication = z.infer<typeof publicationSchema>
 //#type para el formulario
-export type PublicationFormData = Pick<Publication,'publicationName' | 'userName' | 'images' | 'description' | 'status'>
+export type PublicationFormData = Pick<Publication,'publicationName' | 'images' | 'description' | 'status'>

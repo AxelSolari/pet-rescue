@@ -1,7 +1,7 @@
 import { ShareIcon, ClipboardDocumentIcon } from "@heroicons/react/20/solid"
 import { useRef ,useState } from "react"
 import type { Publication } from "../types"
-import { useClickOutside } from "../hooks/useClickOutside"
+import { useClickOutside } from "./hooks/useClickOutside"
 
 type ShareButtonProps = {
     publicationId: Publication['_id']

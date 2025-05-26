@@ -1,9 +1,20 @@
-import { Outlet } from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom"
 import Logo from "../components/Logo"
 import NavMenu from "../components/NavMenu"
 import { Flip, ToastContainer } from 'react-toastify'
+import { useAuth } from "../components/hooks/useAuth"
 
 export default function AppLayout() {
+
+    const { data, isError, isLoading } = useAuth()
+    
+    if(isLoading) return 'Cargando...'
+
+    //#si el usuario no esta registrado redirige a login
+    if(isError) {
+        return <Navigate to='/auth/login' />
+    }
+
   return (
     <>
         <header

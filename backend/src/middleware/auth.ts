@@ -22,9 +22,9 @@ export const authenticate = async (req : Request, res : Response, next : NextFun
         return
     }
 
-
+    //#tomar solo el tokene
     const token = bearer.split(' ')[1]
-    console.log(token)
+    // console.log(token)
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)

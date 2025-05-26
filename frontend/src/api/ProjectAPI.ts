@@ -39,6 +39,24 @@ export async function getPublications() {
         }
     }
 }
+//#obtener las publicaciones de ese usuario
+export async function getMyPublications() {
+    
+
+    try {
+        const { data } = await api('/publications/my-publications')
+
+        const response = dashboardPublications.safeParse(data)
+
+        if(response.success) {
+            return response.data
+        }
+    } catch (error) {
+        if(isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.error)
+        }
+    }
+}
 
 //#obtener la publicacion por Id//# se pasa type de publication para el id
 export async function getPublicationById(id: Publication['_id']) {

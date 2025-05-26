@@ -1,7 +1,5 @@
 import type { Request, Response } from "express"
 import Publication from "../models/Publication"
-import { parse } from "node:path/win32"
-
 //# se crea controlador para publication
 export class PublicationController {
     
@@ -10,7 +8,9 @@ export class PublicationController {
         
         //# instancia de objeto de Publication
         const publication = new Publication(req.body)
+        publication.userProfile = req.user.id
         console.log(req.user)
+
         //#almacenar la publicacion con try catch
         try {
             await publication.save()
@@ -23,6 +23,20 @@ export class PublicationController {
     static getAllPublications = async (req: Request, res: Response) => {
         try {
             const publications = await Publication.find({})
+            res.json(publications)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    //#obtener las publicaciones de usuario autenticado
+    static myPublications = async(req: Request, res: Response) => {
+        try{ 
+            const publications = await Publication.find({
+                $or: [
+                    {userProfile: {$in: req.user.id}}
+                ]
+            })
             res.json(publications)
         } catch (error) {
             console.log(error)
@@ -63,9 +77,16 @@ export class PublicationController {
                 res.status(404).json({error: error.message})
                 return
             }
+
+            //#validar que la actualizacion la haga el propietario de la publicacion
+            if(publication.userProfile.toString() !== req.user.id.toString()) {
+                const error = new Error('No puedes realizar esta accion')
+                res.status(404).json({error: error.message})
+                return
+            }
+
             //#actualizar la publicacion
             publication.publicationName = req.body.publicationName
-            publication.userName = req.body.userName
             publication.images = req.body.images
             publication.description = req.body.description
             publication.status = req.body.status
@@ -88,6 +109,13 @@ export class PublicationController {
             //#validacion en caso que la publicacion no exista
             if(!publication) {
                 const error = new Error('Publicacion no encontrada')
+                res.status(404).json({error: error.message})
+                return
+            }
+
+            //#validar que el usuario de la publicacion pueda eliminar
+            if(publication.userProfile.toString() !== req.user.id.toString()) {
+                const error = new Error('No puedes realizar esta accion')
                 res.status(404).json({error: error.message})
                 return
             }

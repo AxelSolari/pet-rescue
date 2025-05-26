@@ -1,7 +1,7 @@
 //# se importa mongoose, {schema,document}
 import mongoose, {Schema, Document, PopulatedDoc, Types} from "mongoose";
 import { IComment } from "./Comentarios";
-
+import { IUser } from "./User";
 //#estados para las publicaciones
 const publcationStatus = {
     "PERDIDO": 'perdido',
@@ -18,11 +18,11 @@ export type PublicationStatus = typeof publcationStatus[keyof typeof publcationS
 //# interface para typescript posteriormente se crea el 'schema'
 export interface IPublication  extends Document {
     publicationName: string,
-    userName: string,
     images: string[],
     description: string
     comments: PopulatedDoc<IComment & Document>[],
     status: PublicationStatus
+    userProfile: PopulatedDoc<IUser & Document>
 }
 
 //#schema/modelo para mongoose
@@ -31,11 +31,6 @@ const PublicationSchema: Schema = new Schema({
         type: String,
         required: true,
         trim: true
-    },
-    userName: {
-        type: String,
-        required: true,
-        trim: true,
     },
     images: {
         type: [String],
@@ -56,6 +51,10 @@ const PublicationSchema: Schema = new Schema({
         type: String,
         enum: Object.values(publcationStatus),
         required: true
+    },
+    userProfile: {
+        type: Types.ObjectId,
+        ref: 'User'
     }
 }, {timestamps: true})
 

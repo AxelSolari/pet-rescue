@@ -1,10 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { getPublications } from "../api/ProjectAPI";
 import { ClipLoader } from "react-spinners";
-import { ChatBubbleBottomCenterIcon, ShareIcon } from "@heroicons/react/20/solid";
 import ModalView from "./ModalView";
 import { useNavigate } from "react-router-dom";
-import ShareButton from "./ShareButton";
 
 const statusColors: Record<string, string> = {
     perdido: "bg-red-700 text-white font-bold",
@@ -52,7 +50,7 @@ export default function MainList() {
                                     <p className="text-sm">
                                         Creado por:{" "}
                                         <span className="font-semibold">
-                                            {publication.userName}
+                                            INVITADO
                                         </span>
                                     </p>
                                 </div>

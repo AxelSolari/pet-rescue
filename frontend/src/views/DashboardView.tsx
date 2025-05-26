@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { PlusCircleIcon } from "@heroicons/react/20/solid";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deletePublication, getPublications } from "../api/ProjectAPI";
+import { deletePublication, getMyPublications, getPublications } from "../api/ProjectAPI";
 import { ClipLoader } from "react-spinners";
 import NavCard from "../components/publications/NavCard";
 import { toast } from "react-toastify";
@@ -21,7 +21,7 @@ const statusText: Record<string, string> = {
 export default function DashBoardView() {
     const { data, isLoading } = useQuery({
         queryKey: ["publications"],
-        queryFn: getPublications,
+        queryFn: getMyPublications,
     });
 
     const queryClient = useQueryClient()
@@ -82,7 +82,7 @@ export default function DashBoardView() {
                                             </h3>
                                             |
                                             <p className="text-sm"
-                                            >Creado por: <span className="font-semibold">{publication.userName}</span></p>
+                                            >Creado por: <span className="font-semibold">INVITADO</span></p>
                                         </div>
                                         <div className="w-full border-b border-gray-400"></div>
                                         <div className="flex items-center gap-6 lg:justify-around">
