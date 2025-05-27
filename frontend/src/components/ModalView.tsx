@@ -1,12 +1,14 @@
 import { Fragment, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { Navigate, replace, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getPublicationById } from '../api/ProjectAPI';
 import { toast } from 'react-toastify';
 import { formatDate } from '../utils/utils';
 import { ChatBubbleBottomCenterIcon } from '@heroicons/react/20/solid';
 import ShareButton from './ShareButton';
+
+
 
 const statusColors: Record<string, string> = {
     perdido: "bg-red-700 text-white font-bold",
@@ -20,6 +22,8 @@ const statusText: Record<string, string> = {
     encontrado: "Encontrado",
     adoptado: "Adoptado",
 };
+
+
 
 export default function ModalView() {
 
@@ -98,7 +102,7 @@ export default function ModalView() {
                                     <p className=" text-slate-500">
                                         Publicado por:{" "}
                                         <span className="font-bold text-lg">
-                                            {data.userName}
+                                            
                                         </span>
                                     </p>
                                     <Dialog.Title

@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery} from "@tanstack/react-query";
 import { getPublications } from "../api/ProjectAPI";
 import { ClipLoader } from "react-spinners";
 import ModalView from "./ModalView";
@@ -18,10 +18,15 @@ const statusText: Record<string, string> = {
 };
 
 export default function MainList() {
+    
+
     const { data, isLoading } = useQuery({
         queryKey: ["publications"],
         queryFn: getPublications,
+        // refetchOnMount: true
     });
+
+
 
     const navigate = useNavigate()
 
@@ -50,7 +55,7 @@ export default function MainList() {
                                     <p className="text-sm">
                                         Creado por:{" "}
                                         <span className="font-semibold">
-                                            INVITADO
+                                            {publication.userProfile.userName}
                                         </span>
                                     </p>
                                 </div>

@@ -3,6 +3,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { getPublications } from '../api/ProjectAPI';
 import { formatDate } from '../utils/utils';
+import type { User } from '../types';
 
 const statusColors: Record<string, string> = {
     perdido: "bg-red-700 text-white font-bold",
@@ -17,7 +18,11 @@ const statusText: Record<string, string> = {
     adoptado: "Adoptado",
 }
 
-export function EmblaCarousel() {
+type EmblaCarouselProps = { 
+  userName: User['userName']
+}
+
+export function EmblaCarousel({userName} : EmblaCarouselProps) {
   const [emblaRef] = useEmblaCarousel({loop: true}, [Autoplay()]);
 
   const { data: publications } = useQuery({
@@ -41,7 +46,7 @@ export function EmblaCarousel() {
                 />
                 <span className={`absolute top-0 text-xs px-3 py-1 ${statusColors[pub.status]}`}>{statusText[pub.status]}</span>
                 <div className='flex justify-between px-2 py-1'>
-                    <p className='text-sm'>Publicado por: <span className='font-bold italic'>{pub.userName}</span></p>
+                    <p className='text-sm'>Publicado por: <span className='font-bold italic'>{userName}</span></p>
                     <p className='text-sm text-slate-600'>Creado el: <span className='italic'>{formatDate(pub.createdAt)}</span></p>
                 </div>
             </div>

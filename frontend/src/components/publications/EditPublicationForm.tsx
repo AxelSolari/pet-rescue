@@ -19,7 +19,6 @@ export default function EditPublicationForm({data, publicationId} : EditPublicat
     // console.log(data)
         const { register, handleSubmit, formState: {errors}} = useForm({defaultValues: {
              publicationName: data.publicationName, 
-            userName: data.userName,
             images: data.images,
             description: data.description, 
             status: data.status
@@ -34,7 +33,7 @@ export default function EditPublicationForm({data, publicationId} : EditPublicat
                 toast.error(error.message)
             },
             onSuccess: (data) => {
-                queryClient.invalidateQueries({queryKey: ['publications']})
+                queryClient.invalidateQueries({queryKey: ['myPublications']})
                 queryClient.invalidateQueries({queryKey: ['editPublication', publicationId]})//# para que haga refetch en la edicion
                 toast.success(data)
                 navigate('/dashboardview')

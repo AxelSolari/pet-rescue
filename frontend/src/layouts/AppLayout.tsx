@@ -6,16 +6,14 @@ import { useAuth } from "../components/hooks/useAuth"
 
 export default function AppLayout() {
 
-    const { data, isError, isLoading } = useAuth()
-    
-    if(isLoading) return 'Cargando...'
+    const { data, isError } = useAuth()
 
-    //#si el usuario no esta registrado redirige a login
     if(isError) {
         return <Navigate to='/auth/login' />
     }
 
-  return (
+
+  if(data) return (
     <>
         <header
             className="bg-amber-300 py-5 px-2"
@@ -25,7 +23,9 @@ export default function AppLayout() {
                     <Logo />
                 </div>
                 <h1>PETRESCUE</h1>
-                <NavMenu />
+                <NavMenu  
+                    userName={data.userName}
+                />
             </div>
         </header>
         <section className="">

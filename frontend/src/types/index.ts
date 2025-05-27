@@ -16,6 +16,16 @@ export type RequestConfirmationCodeForm = Pick<Auth, 'email'>
 export type ForgotPasswordForm = Pick<Auth, 'email'>
 export type NewPasswordForm = Pick<Auth, 'password' | 'password_confirmation'>
 
+//User 
+export const userSchema = authSchema.pick({
+    userName: true,
+    email: true
+}).extend({
+    _id: z.string()
+})
+export type User = z.infer<typeof userSchema>
+
+
 //#Publication Schemas
 export const publicationSchema = z.object({
     _id: z.string(),
@@ -24,8 +34,10 @@ export const publicationSchema = z.object({
     description: z.string(),
     status: z.string(),
     createdAt: z.string(),
-    updatedAt: z.string()
+    updatedAt: z.string(),
+    userProfile: userSchema
 })
+
 
 //#schema para mostrar las publicaciones
 export const dashboardPublications = z.array(
@@ -36,10 +48,37 @@ export const dashboardPublications = z.array(
         description: true,
         status: true,
         createdAt: true,
-        updatedAt: true
+        updatedAt: true,
+        userProfile: true
     })
 )
+
+export const myPublications = z.array(
+    publicationSchema.pick({
+        _id: true,
+        publicationName: true,
+        images: true,
+        description: true,
+        status: true,
+        createdAt: true,
+        updatedAt: true,
+    })
+)
+export const myPublicationById = 
+    publicationSchema.pick({
+        _id: true,
+        publicationName: true,
+        images: true,
+        description: true,
+        status: true,
+        createdAt: true,
+        updatedAt: true,
+    })
+
+
 
 export type Publication = z.infer<typeof publicationSchema>
 //#type para el formulario
 export type PublicationFormData = Pick<Publication,'publicationName' | 'images' | 'description' | 'status'>
+export type MyPublications = z.infer<typeof myPublications>
+export type ModalId = Pick<Publication, 'userProfile'>

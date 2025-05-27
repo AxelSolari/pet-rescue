@@ -22,7 +22,7 @@ export class PublicationController {
     //#metodo para obtener las publicaciones
     static getAllPublications = async (req: Request, res: Response) => {
         try {
-            const publications = await Publication.find({})
+            const publications = await Publication.find({}).populate('userProfile', 'userName email')
             res.json(publications)
         } catch (error) {
             console.log(error)

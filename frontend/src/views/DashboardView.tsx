@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { PlusCircleIcon } from "@heroicons/react/20/solid";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deletePublication, getMyPublications, getPublications } from "../api/ProjectAPI";
+import { deletePublication, getMyPublications } from "../api/ProjectAPI";
 import { ClipLoader } from "react-spinners";
 import NavCard from "../components/publications/NavCard";
 import { toast } from "react-toastify";
@@ -20,7 +20,7 @@ const statusText: Record<string, string> = {
 }
 export default function DashBoardView() {
     const { data, isLoading } = useQuery({
-        queryKey: ["publications"],
+        queryKey: ["myPublications"],
         queryFn: getMyPublications,
     });
 
@@ -76,14 +76,9 @@ export default function DashBoardView() {
                                         publicationId ={publication._id}
                                         mutate= {mutate}
                                       />
-                                        <div className="gap-2 flex py-2 items-center">
-                                            <h3 className="text-xl">
-                                                {publication.publicationName}
-                                            </h3>
-                                            |
-                                            <p className="text-sm"
-                                            >Creado por: <span className="font-semibold">INVITADO</span></p>
-                                        </div>
+                                        <h3 className="text-xl">
+                                            {publication.publicationName}
+                                        </h3>
                                         <div className="w-full border-b border-gray-400"></div>
                                         <div className="flex items-center gap-6 lg:justify-around">
                                             <img src='/perro.jpg' className="w-44 my-3 rounded" />
