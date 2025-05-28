@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { Bars3Icon, UserIcon, NewspaperIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/20/solid'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import type { User } from '../types'
 import { useQueryClient } from '@tanstack/react-query'
 
@@ -11,10 +11,11 @@ type NavMenuProps = {
 
 export default function NavMenu({userName} : NavMenuProps) {
   const queryClient = useQueryClient()
-  
+  const navigate = useNavigate()
   const logout = () => {
     localStorage.removeItem('AUTH_TOKEN')
-    queryClient.invalidateQueries({queryKey: ['user']})
+    queryClient.removeQueries({queryKey: ['user']})
+    navigate('/auth/login')
   }
   return (
     <Popover className="relative">

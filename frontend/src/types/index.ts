@@ -73,6 +73,7 @@ export const myPublicationById =
         status: true,
         createdAt: true,
         updatedAt: true,
+        userProfile: true
     })
 
 

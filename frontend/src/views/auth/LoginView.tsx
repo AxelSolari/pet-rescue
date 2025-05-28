@@ -25,7 +25,7 @@ export default function LoginView() {
       toast.success('Iniciando sesion...')
       setTimeout(() => {
         navigate("/")
-      },2000)
+      },1000)
     }
   })
 

@@ -102,7 +102,7 @@ export default function ModalView() {
                                     <p className=" text-slate-500">
                                         Publicado por:{" "}
                                         <span className="font-bold text-lg">
-                                            
+                                            {data.userProfile.userName}
                                         </span>
                                     </p>
                                     <Dialog.Title

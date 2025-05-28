@@ -49,7 +49,7 @@ export class PublicationController {
         const { id } = req.params
       
         try {
-            const publication = await Publication.findById(id).populate('comments')
+            const publication = await Publication.findById(id).populate('comments').populate('userProfile', 'userName email')
 
             //#validacion en caso que el id tenga al un dato erroneo
             if(!publication) {

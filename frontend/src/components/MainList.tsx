@@ -23,7 +23,7 @@ export default function MainList() {
     const { data, isLoading } = useQuery({
         queryKey: ["publications"],
         queryFn: getPublications,
-        // refetchOnMount: true
+  
     });
 
 
