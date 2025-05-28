@@ -31,7 +31,7 @@ export default function AppLayout() {
         <section className="">
             <Outlet />
         </section>
-         <footer className="py-2 bg-amber-300 bottom-0 rounded-t-lg w-full">
+         <footer className="py-2 bg-amber-300 rounded-t-lg w-full">
             <p className="text-center">Copyright • {new Date().getFullYear()}</p>
         </footer>
         <ToastContainer

@@ -12,6 +12,9 @@ import ConfirmAccountView from "./views/auth/ConfirmAccountView";
 import RequestNewCodeVidew from "./views/auth/RequestNewCodeVidew";
 import ForgotPasswordView from "./views/auth/ForgotPasswordView";
 import NewPasswordView from "./views/auth/NewPasswordView";
+import ProfileView from "./views/profile/ProfileView";
+import ChangePasswordView from "./views/profile/ChangePasswordView";
+import ProfileLayout from "./layouts/ProfileLayout";
 
 export default function Router() {
 
@@ -24,6 +27,10 @@ export default function Router() {
                     <Route path="/publications/create" element={<CreatePublicationView />} />
                     <Route path="/publications/:publicationId/edit" element={<EditPublicationView />} />
                     <Route path="/notfound" element={<NotFound />} />
+                    <Route element={<ProfileLayout />}> 
+                        <Route path="/profile" element={<ProfileView />} />
+                        <Route path="/profile/password" element={<ChangePasswordView />} />
+                    </Route>
                 </Route>
 
                 <Route element={<AuthLayout />}>
