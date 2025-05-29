@@ -12,10 +12,8 @@ export default function CreatePublicationView() {
     
 
     const navigate = useNavigate()
-    const simulatedUser = "Invitado"
     const initualValues: PublicationFormData= {
         publicationName: "", 
-        userName: simulatedUser,
         images: [],
         description: "", 
         status: ""

@@ -1,6 +1,6 @@
 //# se importa mongoose, {schema,document}
 import mongoose, {Schema, Document, PopulatedDoc, Types} from "mongoose";
-import { IComment } from "./Comentarios";
+// import { IComment } from "./Comentarios";
 import { IUser } from "./User";
 //#estados para las publicaciones
 const publcationStatus = {
@@ -20,7 +20,7 @@ export interface IPublication  extends Document {
     publicationName: string,
     images: string[],
     description: string
-    comments: PopulatedDoc<IComment & Document>[],
+    // comments: PopulatedDoc<IComment & Document>[],
     status: PublicationStatus
     userProfile: PopulatedDoc<IUser & Document>
 }
@@ -41,12 +41,12 @@ const PublicationSchema: Schema = new Schema({
         required: true,
         trim: true,
     },
-    comments: [
-        {
-            type: Types.ObjectId,
-            ref: 'Comment'
-        }
-    ],
+    // comments: [
+    //     {
+    //         type: Types.ObjectId,
+    //         ref: 'Comment'
+    //     }
+    // ],
     status: {
         type: String,
         enum: Object.values(publcationStatus),

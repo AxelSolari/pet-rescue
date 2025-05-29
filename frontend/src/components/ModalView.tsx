@@ -92,32 +92,34 @@ export default function ModalView() {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-5">
-                                    <p className=" text-slate-500">
-                                        Creado:{" "}
-                                        <span className="font-semibold">
-                                            {formatDate(data.createdAt)}
-                                        </span>
-                                    </p>
+                                <Dialog.Panel className=" w-full lg:w-1/2 max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-5">
+                                <div className='lg:flex lg:items-center lg:justify-between '>
                                     <p className=" text-slate-500">
                                         Publicado por:{" "}
                                         <span className="font-bold text-lg">
                                             {data.userProfile.userName}
                                         </span>
                                     </p>
+                                    <p className=" text-slate-500">
+                                        Creado:{" "}
+                                        <span className="font-bold">
+                                            {formatDate(data.createdAt)}
+                                        </span>
+                                    </p>
+                                </div>
                                     <Dialog.Title
                                         as="h3"
-                                        className="font-black text-2xl my-2"
+                                        className="font-semibold text-2xl my-5"
                                     >
                                         {data.publicationName}
                                     </Dialog.Title>
 
                                     <img
-                                        className="w-full"
+                                        className="w-full rounded"
                                         src="/perro.jpg"
                                         alt="Imagen del animal"
                                     />
-                                    <div className="flex items-center my-1">
+                                    <div className="flex items-center justify-end my-1">
                                         <p className="text-lg">
                                             Estado:{" "}
                                             <span
@@ -132,20 +134,16 @@ export default function ModalView() {
                                     <p className="text-xl font-bold underline mb-2">
                                         Descripcion:
                                     </p>
-                                    <p className="font-semibold">
+                                    <p>
                                         {data.description}
                                     </p>
-                                    <div className="flex justify-between lg:justify-between p-2 mt-2 items-center">
-                                        <button className="flex items-center gap-2 cursor-pointer text-sm p-2">
-                                            <ChatBubbleBottomCenterIcon className="w-4 h-4 text-yellow-700" />
-                                            Comentar
-                                        </button>
-                                        <div>
+                                    
+                                        <div className='flex justify-end'>
                                             <ShareButton
                                                 publicationId={publicationId}
                                             />
                                         </div>
-                                    </div>
+                               
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>

@@ -42,12 +42,12 @@ export function EmblaCarousel({userName} : EmblaCarouselProps) {
                 <img 
                     src='/perro.jpg'
                     alt={pub.description}
-                    className='w-full h-64 object-cover shadow relative'
+                    className='w-full h-64 lg:h-[400px] object-cover shadow relative'
                 />
-                <span className={`absolute top-0 text-xs px-3 py-1 ${statusColors[pub.status]}`}>{statusText[pub.status]}</span>
-                <div className='flex justify-between px-2 py-1'>
-                    <p className='text-sm'>Publicado por: <span className='font-bold italic'>{userName}</span></p>
-                    <p className='text-sm text-slate-600'>Creado el: <span className='italic'>{formatDate(pub.createdAt)}</span></p>
+                <span className={`absolute top-0 text-xs px-10 rounded py-1 ${statusColors[pub.status]}`}>{statusText[pub.status]}</span>
+                <div className='flex justify-between px-3 py-1'>
+                    <p className='text-sm text-slate-600'>Publicado por: <span className='font-bold italic'>{userName}</span></p>
+                    <p className='text-sm text-slate-600'>Creado el: <span className='italic font-bold'>{formatDate(pub.createdAt)}</span></p>
                 </div>
             </div>
 

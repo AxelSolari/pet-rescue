@@ -43,11 +43,11 @@ export default function MainList() {
                     {data.map((publication) => (
                         <li
                             key={publication._id}
-                            className="bg-white py-2 mb-4 shadow-lg px-3 rounded-lg w-[90%] lg:w-1/2 mx-auto cursor-pointer"
+                            className="bg-white py-2 mb-4 shadow-lg px-3 rounded-lg w-[95%] border border-white lg:hover:border lg:hover:border-rose-300 lg:w-1/2 mx-auto cursor-pointer transition-all"
                             onClick={() => navigate(`/?viewDetails=true&publicationId=${publication._id}`)}
                         >
-                            <div className="">
-                                <div className="gap-2 flex py-2 items-center">
+                            <div>
+                                <div className="gap-2 flex py-2 items-center lg:justify-between">
                                     <h3 className="text-xl">
                                         {publication.publicationName}
                                     </h3>

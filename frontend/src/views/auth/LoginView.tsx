@@ -35,7 +35,7 @@ export default function LoginView() {
     <>
       <form
         onSubmit={handleSubmit(handleLogin)}
-        className="p-5 bg-white/20 backdrop-blur-2xl  rounded-lg border border-white shadow-lg"
+        className="p-5 bg-white/20 backdrop-blur-2xl  rounded-lg border border-white shadow-lg w-[90%] lg:w-1/2 mx-auto"
         noValidate
       >
         <h2 className="mb-5 text-center text-3xl text-indigo-800 font-bold">Inicia Sesion</h2>
@@ -76,7 +76,7 @@ export default function LoginView() {
         <input
           type="submit"
           value='Iniciar Sesión'
-          className="bg-indigo-700 hover:bg-indigo-500 mx-auto block w-1/2 p-2  text-white cursor-pointer rounded-lg transition-all duration-300"
+          className="bg-rose-400 hover:bg-rose-700 mx-auto block w-1/2 lg:w-1/3 p-2  text-white cursor-pointer rounded-lg transition-all duration-300"
         />
       </form>
       <nav className="mt-10 flex flex-col space-y-4">

@@ -16,13 +16,13 @@ export default function AppLayout() {
   if(data) return (
     <>
         <header
-            className="bg-amber-300 py-5 px-2"
+            className="bg-violet-100 py-5 px-2"
         >
             <div className="flex items-center justify-between px-4 lg:justify-around">
                 <div className="w-22 flex items-center">
                     <Logo />
                 </div>
-                <h1>PETRESCUE</h1>
+                <h1 className="font-display font-semibold text-indigo-700 text-xl">PetRescue</h1>
                 <NavMenu  
                     userName={data.userName}
                 />
@@ -31,7 +31,7 @@ export default function AppLayout() {
         <section className="">
             <Outlet />
         </section>
-         <footer className="py-2 bg-amber-300 rounded-t-lg w-full">
+         <footer className="py-2 bg-violet-100 rounded-t-lg w-full">
             <p className="text-center">Copyright • {new Date().getFullYear()}</p>
         </footer>
         <ToastContainer
