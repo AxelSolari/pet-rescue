@@ -4,7 +4,7 @@ import { checkPassword, hashPassword } from '../utils/auth'
 import Token from '../models/Token'
 import { generateToken } from '../utils/token'
 import { AuthEmail } from '../emails/AuthEmails'
-import { generateJWT } from '../utils/jwt'
+import { generateJWT, guestJWT } from '../utils/jwt'
 export class AuthController {
     //#metodo crea cuenta
     static createAccount = async (req: Request, res: Response) => {
@@ -261,6 +261,37 @@ export class AuthController {
                 res.send('El password se modifico correctamente')
             } catch (error) {
                 res.status(500).send('Hubo un error')
+            }
+        }
+
+        static loginAsGuest = async (req: Request, res: Response) => {
+            try {
+               const guestUser = new User({
+                    userName: 'Invitado',
+                    isGuest: true,
+                    confirmed: true
+               })
+
+               await guestUser.save()
+
+               const token = guestJWT({
+                    id: guestUser._id.toString(), 
+                    isGuest: true
+                })
+
+               res.json({
+                user: {
+                    id: guestUser._id,
+                    userName: guestUser.userName,
+                    isGuest: true
+                },
+                token
+               })
+                
+
+            } catch (error) {
+                console.log(error)
+                res.status(500).send('Error al iniciar sesión como invitado')
             }
         }
 

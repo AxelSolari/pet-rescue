@@ -4,6 +4,8 @@ import { PublicationController } from '../controllers/PublicationController'
 import { body, param } from 'express-validator'
 import { handleInputErrors } from '../middleware/validation'
 import { authenticate } from '../middleware/auth'
+import { requireAuth } from '../middleware/requireAuth'
+import { rejectGuest } from '../middleware/rejectGuest'
 
 //# se importo router
 
@@ -14,6 +16,8 @@ const router = Router()
 //#.post para crear publicaciones
 router.post('/',
     authenticate,
+    requireAuth,
+    rejectGuest,
     //#validacion con express-validator
     body('publicationName')
         .notEmpty().withMessage('El nombre de la publicacion es obligatorio'),

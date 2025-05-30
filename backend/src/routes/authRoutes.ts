@@ -108,4 +108,9 @@ router.post('/update-password',
     handleInputErrors,
     AuthController.updateCurrentUserPassword
 )
+
+router.post('/guest', 
+
+    AuthController.loginAsGuest
+)
 export default router
