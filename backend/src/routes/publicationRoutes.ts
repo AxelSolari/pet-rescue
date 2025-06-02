@@ -58,6 +58,8 @@ router.get('/:id',
 //#endpoint para actualizar publicacion
 router.put('/:id', 
     authenticate,
+    requireAuth,
+    rejectGuest,
     //#se importo 'param' de express-validator para validar ID
     param('id')
         .isMongoId().withMessage('ID no valido'),
@@ -78,6 +80,8 @@ router.put('/:id',
 //#endpoint para eliminar publicacion
 router.delete('/:id', 
     authenticate,
+    requireAuth,
+    rejectGuest,
     //#se importo 'param' de express-validator para validar ID
     param('id')
         .isMongoId().withMessage('ID no valido'),
@@ -85,54 +89,6 @@ router.delete('/:id',
     //# se importa el controlador nuevo con el metodo
     PublicationController.deletePublication
 )
-
-
-// //#ROUTES FOR COMMENTS
-// router.param('publicationId', publicationExists) //-> codigo para no estar colocando en cada endpoint 'validatePublicationExists' con este codigo el middleware se ejecuta siempre antes de la peticion y valida que la publicacion exista
-
-// //#createComment
-// router.post('/:publicationId/comments',
-//     body('description')
-//         .notEmpty().withMessage('No puedes enviar un comentario vacio'),
-//     handleInputErrors,
-//     CommentsController.createComment
-// )
-
-// //#get all comments for that publication
-// router.get('/:publicationId/comments',
-//     CommentsController.getPublicationComments
-// )
-
-
-// //# utiliza middleware para validar que el comentario existsa 'commentId'
-// router.param('commentId', commentExists)
-// router.param('commentId', commentBelongsToPublication)
-// //#get comment by id
-// router.get('/:publicationId/comments/:commentId',
-//     //#validar el commentId
-//     param('commentId').isMongoId().withMessage('ID no valido'),
-//     handleInputErrors,
-//     CommentsController.getCommentById
-// )
-
-// //#actualizar comentario
-// router.put('/:publicationId/comments/:commentId',
-//     //#validar el commentId
-//     param('commentId').isMongoId().withMessage('ID no valido'),
-//     body('description')
-//         .notEmpty().withMessage('No puedes enviar un comentario vacio'),
-//     handleInputErrors,
-//     CommentsController.updateComment
-// )
-
-// //#eliminar comentario
-// router.delete('/:publicationId/comments/:commentId',
-//     //#validar el commentId
-//     param('commentId').isMongoId().withMessage('ID no valido'),
-//     handleInputErrors,
-//     CommentsController.deleteComment
-// )
-
 
 //#se exporta el router
 export default router

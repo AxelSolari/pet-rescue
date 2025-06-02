@@ -3,7 +3,10 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import User from "../models/User";
 
 export const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.header('Authorization')?.replace('Bearer', '')
+
+    const bearer = req.headers.authorization
+    const token = bearer.split(' ')[1]
+
     if(!token) {
         res.status(401).json({message: 'No se proporciono un token'})
     }
@@ -11,10 +14,10 @@ export const requireAuth = async (req: Request, res: Response, next: NextFunctio
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload
 
-        const user = await User.findById(decoded.id).select('_id userName email')
+        const user = await User.findById(decoded.id).select('_id userName email isGuest')
         if(user) {
             req.user = user
-            next()
+           return next()
         }
 
          res.status(401).json({message: 'Token Invalido'})

@@ -266,13 +266,19 @@ export class AuthController {
 
         static loginAsGuest = async (req: Request, res: Response) => {
             try {
-               const guestUser = new User({
-                    userName: 'Invitado',
-                    isGuest: true,
-                    confirmed: true
-               })
 
-               await guestUser.save()
+                //#codigo que reemplaza el invitado actual
+                let guestUser = await User.findOne({isGuest: true})
+
+                if(!guestUser) {
+                        guestUser = new User({
+                            userName: 'Invitado',
+                            isGuest: true,
+                            confirmed: true
+                        })
+        
+                        await guestUser.save()
+                }
 
                const token = guestJWT({
                     id: guestUser._id.toString(), 
@@ -280,11 +286,6 @@ export class AuthController {
                 })
 
                res.json({
-                user: {
-                    id: guestUser._id,
-                    userName: guestUser.userName,
-                    isGuest: true
-                },
                 token
                })
                 
