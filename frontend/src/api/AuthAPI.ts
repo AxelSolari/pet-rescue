@@ -1,8 +1,7 @@
 import api from "../lib/axios";
 import { isAxiosError } from "axios";
 import { userSchema, type ConfirmToken, type ForgotPasswordForm, type NewPasswordForm, type RequestConfirmationCodeForm, type UserLoginForm, type UserRegistrationForm } from "../types";
-import { useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+
 
 export async function createAccount(formData: UserRegistrationForm){
     try {
@@ -98,6 +97,20 @@ export async function getUser() {
     } catch (error) {
         if(isAxiosError(error) && error.response) {
             throw new Error(error.response.data.error)
+        }
+    }
+}
+
+export async function authenticateGuest() {
+    try {
+        const url = '/auth/guest'
+        const { data } = await api.post<{token: string}>(url)
+        localStorage.setItem('AUTH_TOKEN', data.token)
+
+        return data
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.error);
         }
     }
 }

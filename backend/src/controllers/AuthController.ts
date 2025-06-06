@@ -68,6 +68,7 @@ export class AuthController {
                 if(!user) {
                     const error = new Error('Usuario no encontrado')
                     res.status(404).json({error: error.message})
+                    return
                 }
                 if(!user.confirmed){
                     //# si la cuenta no fue confirmada generar token nuevo
@@ -85,6 +86,7 @@ export class AuthController {
 
                     const error = new Error('La cuenta no ha sido confirmada, hemos enviado un e-mail de confirmacion')
                     res.status(401).json({error: error.message})
+                    return
                 }
 
                 //#revisar password
@@ -92,6 +94,7 @@ export class AuthController {
                 if(!isPasswordCorrect){
                     const error = new Error('Password incorrecto')
                     res.status(401).json({error: error.message})
+                    return
                 }
 
                 //#generar jwt
@@ -100,6 +103,7 @@ export class AuthController {
                 res.send(token)
             } catch (error) {
                 res.status(500).json({error: 'Hubo un error'})
+                return
             }
         }
 
@@ -213,8 +217,21 @@ export class AuthController {
             
         }
 
-        static user = async (req: Request, res: Response) => {
-             res.json(req.user)
+        static user = async (req: Request, res: Response) : Promise<void> => {
+            try {
+                if(req.user?.isGuest) {
+                     res.json({
+                        _id: 'invitado',
+                        userName: 'Inivitado',
+                        email: 'invitado@correo.com',
+                    })
+                } else {
+                    res.json(req.user)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+
              return
         }
 

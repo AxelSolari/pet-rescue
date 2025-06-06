@@ -30,16 +30,18 @@ export const authenticate = async (req : Request, res : Response, next : NextFun
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         //#verificar que el usuario exista en la db
         if(typeof decoded === 'object' && decoded.id){
-            const user = await User.findById(decoded.id).select('_id userName email')
+            const user = await User.findById(decoded.id).select('_id userName email isGuest')
             if(user){
                 req.user = user
+                return next()
             } else {
                 res.status(500).json({error: 'Token no valido'})
+                return
             }
         }
     } catch (error) {
         res.status(500).json({error: 'Token no valido'})
     }
 
-    next()
+    // next()
 }

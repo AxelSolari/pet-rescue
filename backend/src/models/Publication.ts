@@ -20,7 +20,6 @@ export interface IPublication  extends Document {
     publicationName: string,
     images: string[],
     description: string
-    // comments: PopulatedDoc<IComment & Document>[],
     status: PublicationStatus
     userProfile: PopulatedDoc<IUser & Document>
 }
@@ -41,12 +40,6 @@ const PublicationSchema: Schema = new Schema({
         required: true,
         trim: true,
     },
-    // comments: [
-    //     {
-    //         type: Types.ObjectId,
-    //         ref: 'Comment'
-    //     }
-    // ],
     status: {
         type: String,
         enum: Object.values(publcationStatus),

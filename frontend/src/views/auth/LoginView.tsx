@@ -4,7 +4,7 @@ import type { UserLoginForm } from "../../types";
 import ErrorMessage from "../../components/ErrorMessage";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { authenticateUser } from "../../api/AuthAPI";
+import { authenticateGuest, authenticateUser } from "../../api/AuthAPI";
 import { toast } from "react-toastify";
 export default function LoginView() {
 
@@ -26,6 +26,19 @@ export default function LoginView() {
       setTimeout(() => {
         navigate("/")
       },1000)
+    }
+  })
+
+  const { mutate: guestMutate } = useMutation({
+    mutationFn: authenticateGuest,
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    onSuccess: () => {
+      toast.success('Iiniciando sesion como invitado...')
+      setTimeout(() => {
+        navigate('/')
+      }, 1000);
     }
   })
 
@@ -78,7 +91,15 @@ export default function LoginView() {
           value='Iniciar Sesión'
           className="bg-rose-400 hover:bg-rose-700 mx-auto block w-1/2 lg:w-1/3 p-2  text-white cursor-pointer rounded-lg transition-all duration-300"
         />
+
+
       </form>
+        <div className="border-b my-5 w-1/1 mx-auto"></div>
+        <button 
+          className="block mx-auto italic"
+          onClick={() => guestMutate()}
+          >Iniciar sesion como <span className="text-indigo-600 font-bold cursor-pointer">Invitado</span></button>
+
       <nav className="mt-10 flex flex-col space-y-4">
           <Link
             to={'/auth/register'}

@@ -21,8 +21,6 @@ router.post('/',
     //#validacion con express-validator
     body('publicationName')
         .notEmpty().withMessage('El nombre de la publicacion es obligatorio'),
-    body('userName')
-        .notEmpty().withMessage('El nombre de usuario es obligatorio'),
     body('images')
         .notEmpty().withMessage('Al menos una imagen es requerida'),
     body('description')
