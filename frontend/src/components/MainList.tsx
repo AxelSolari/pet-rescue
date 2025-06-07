@@ -47,17 +47,20 @@ export default function MainList() {
                             onClick={() => navigate(`/?viewDetails=true&publicationId=${publication._id}`)}
                         >
                             <div>
-                                <div className="gap-2 flex py-2 items-center lg:justify-between">
-                                    <h3 className="text-xl">
-                                        {publication.publicationName}
-                                    </h3>
-                                    |
-                                    <p className="text-sm">
-                                        Creado por:{" "}
-                                        <span className="font-semibold">
-                                            {publication.userProfile.userName}
-                                        </span>
-                                    </p>
+                                <div className="py-2 lg:flex lg:items-center lg:justify-between">
+                                    <div>
+                                        <h3 className="text-xl ">
+                                            {publication.publicationName}
+                                        </h3>
+                                    </div>
+                                    <div className="mt-3 lg:mt-0">
+                                        <p className="text-sm">
+                                            Creado por:{" "}
+                                            <span className="font-semibold text-indigo-700">
+                                                {publication.userProfile.userName}
+                                            </span>
+                                        </p>
+                                    </div>
                                 </div>
                                 <div className="w-full border-b border-gray-400"></div>
                                 <div className="flex items-center gap-6 lg:justify-around">

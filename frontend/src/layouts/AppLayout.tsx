@@ -7,6 +7,7 @@ import { useAuth } from "../components/hooks/useAuth"
 export default function AppLayout() {
 
     const { data, isError } = useAuth()
+    console.log(data)
 
     if(isError) {
         return <Navigate to='/auth/login' />
@@ -25,6 +26,7 @@ export default function AppLayout() {
                 <h1 className="font-display font-semibold text-indigo-700 text-xl">PetRescue</h1>
                 <NavMenu  
                     userName={data.userName}
+                    isGuest={data._id === 'invitado'}
                 />
             </div>
         </header>

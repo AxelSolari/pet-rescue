@@ -94,13 +94,13 @@ export default function LoginView() {
 
 
       </form>
-        <div className="border-b my-5 w-1/1 mx-auto"></div>
+        <div className="border-b my-5 w-1/2 mx-auto"></div>
         <button 
           className="block mx-auto italic"
           onClick={() => guestMutate()}
           >Iniciar sesion como <span className="text-indigo-600 font-bold cursor-pointer">Invitado</span></button>
 
-      <nav className="mt-10 flex flex-col space-y-4">
+      <nav className="mt-5 flex flex-col space-y-4">
           <Link
             to={'/auth/register'}
             className="text-center text-slate-700"
